@@ -1,28 +1,22 @@
 name: CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-
+on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          # The pinned numerical stack (numpy 2.5.x) requires Python
+          # 3.12 or newer, so CI runs the machine-of-record version.
+          python-version: "3.12"
       - name: Install the pinned stack
         run: pip install -r requirements.txt
-      - name: Fetch the pinned question sources
-        run: sh scripts/fetch_rag_subject.sh
-      - name: Build the frozen question set
-        run: python scripts/build_questions.py
-      - name: Run tests
-        run: python -m pytest tests/ -q
-      - name: Compile all study code
+      - name: Fetch the pinned rag subject and build the question set
+        run: |
+          sh scripts/fetch_rag_subject.sh
+          python scripts/build_questions.py
+      - name: Unit tests
+        run: pytest -q
+      - name: Byte-compile all sources
         run: python -m py_compile src/*.py src/ragref/*.py scripts/*.py
