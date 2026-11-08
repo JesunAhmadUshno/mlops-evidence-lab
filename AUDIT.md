@@ -95,3 +95,9 @@ publishes the full per-question failure table, and removes
 most of the first deduction. Nothing else in the repository
 needs to change for that to happen, which is the point of
 building the harness before the window closed.
+
+Addendum (same day, after the grade above was written): two
+final probes returned one 200 and then a 429 two minutes
+later. The route trickles single calls; it does not sustain a
+run. The grade and the NOT RUN verdicts are unchanged
+(DECISIONS.md D6).

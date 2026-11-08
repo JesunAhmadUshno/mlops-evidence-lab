@@ -60,3 +60,14 @@ failed on 3.11 because the pinned numerical stack requires
 Python 3.12 or newer (numpy 2.5.x declares Requires-Python
 >= 3.12). CI now runs the machine-of-record interpreter, 3.12,
 only. The deduction is recorded in AUDIT.md.
+
+## D6: after the audit was written, the route trickled, not opened
+
+Two final probes after the results commit: the first returned
+200, the second, two minutes later, returned 429. The route
+is releasing roughly isolated calls, not a usable window; a
+scoring run needs several hundred calls. The D4 gate (two
+spaced successes) therefore still holds scoring back, and the
+NOT RUN verdicts stand as delivered. When the route sustains
+two spaced probes, the completion is the scorer command plus
+the results generator, with no other change needed.
