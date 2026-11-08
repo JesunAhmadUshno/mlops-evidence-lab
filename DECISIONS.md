@@ -52,3 +52,11 @@ window burns fewer quota calls per job, and the run's start is
 gated on two spaced probe calls succeeding. The route's
 availability is part of what this half measures; the incident
 is reported in AUDIT.md, not hidden.
+
+## D5: CI runs Python 3.12 only
+
+The first CI matrix (3.11 and 3.12, the sibling pattern)
+failed on 3.11 because the pinned numerical stack requires
+Python 3.12 or newer (numpy 2.5.x declares Requires-Python
+>= 3.12). CI now runs the machine-of-record interpreter, 3.12,
+only. The deduction is recorded in AUDIT.md.

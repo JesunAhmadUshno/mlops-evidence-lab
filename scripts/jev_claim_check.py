@@ -20,7 +20,6 @@ HELPER = Path.home() / "workspace/custom-connectors/custom.typesafe/bin/typesafe
 def main() -> None:
     verdicts = json.loads((ROOT / "results" / "verdicts.json").read_text())
     half1 = json.loads((ROOT / "results" / "half1_metrics.json").read_text())
-    summary = json.loads((ROOT / "results" / "ragas_summary.json").read_text())
     champ = half1["champion-rerun"]
     claim = (
         f"Under one pre-registered protocol (PREREGISTRATION.md is the first "
@@ -35,15 +34,30 @@ def main() -> None:
         f"below the frozen bar of champion + 0.003) and blocked the "
         f"label-permuted negative control (AUC "
         f"{half1['negative-control']['auc']:.4f}); no candidate qualified "
-        f"for promotion, so the promote direction of the gate is untested. "
-        f"H3 is {verdicts['H3']} and H4 is {verdicts['H4']} for the Ragas "
-        f"evaluation of rag-foundation's extractive pipeline on 40 frozen "
-        f"questions (28 in-corpus, 12 adversarial): adversarial mean "
-        f"faithfulness {summary['metrics']['faithfulness']['adversarial_mean']}, "
-        f"answer relevancy {summary['metrics']['answer_relevancy']['in_corpus_mean']} "
-        f"in-corpus against {summary['metrics']['answer_relevancy']['adversarial_mean']} "
-        f"adversarial, with every per-question score and failure published."
+        f"for promotion, so the promote direction of the gate is untested."
     )
+    summary_path = ROOT / "results" / "ragas_summary.json"
+    if summary_path.exists():
+        summary = json.loads(summary_path.read_text())
+        claim += (
+            f" H3 is {verdicts['H3']} and H4 is {verdicts['H4']} for the "
+            f"Ragas evaluation of rag-foundation's extractive pipeline on "
+            f"40 frozen questions (28 in-corpus, 12 adversarial): "
+            f"adversarial mean faithfulness "
+            f"{summary['metrics']['faithfulness']['adversarial_mean']}, "
+            f"answer relevancy "
+            f"{summary['metrics']['answer_relevancy']['in_corpus_mean']} "
+            f"in-corpus against "
+            f"{summary['metrics']['answer_relevancy']['adversarial_mean']} "
+            f"adversarial, with every per-question score and failure "
+            f"published."
+        )
+    else:
+        claim += (
+            " H3 and H4 are recorded as NOT RUN: the only judge route the "
+            "protocol allows returned HTTP 429 on every attempt, so no "
+            "Ragas scores exist and none are claimed."
+        )
     evidence = (ROOT / "RESULTS.md").read_text()
     spec = {
         "model": "jev-1.13.0",
@@ -68,9 +82,10 @@ def main() -> None:
         print(proc.stdout)
         print(proc.stderr, file=sys.stderr)
         raise SystemExit("jev helper failed")
-    body = json.loads(proc.stdout)
+    outer = json.loads(proc.stdout)
     (ROOT / "results" / "jev-claim-check.json").write_text(
-        json.dumps(body, indent=1))
+        json.dumps(outer, indent=1))
+    body = outer.get("response", outer)
     answers = body.get("answers", {})
     noul = answers.get("supported", {}).get("noul")
     route = ("clear" if noul is not None and noul >= 0.85 else
