@@ -1,0 +1,322 @@
+[
+ {
+  "id": "b01-absorb",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What gas do plants absorb from the air for photosynthesis?",
+  "expected_doc": "photosynthesis",
+  "reference": "Plants absorb carbon dioxide from the air for photosynthesis."
+ },
+ {
+  "id": "b02-clouds",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What process forms clouds in the water cycle?",
+  "expected_doc": "water-cycle",
+  "reference": "Condensation forms clouds: water vapour cools high in the sky and condensation forms clouds."
+ },
+ {
+  "id": "b03-newton",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "Who described gravity as a universal attraction between masses?",
+  "expected_doc": "gravity",
+  "reference": "Isaac Newton described gravity as a universal attraction between masses."
+ },
+ {
+  "id": "b04-bees-dance",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "How do bees communicate the location of flowers?",
+  "expected_doc": "bees",
+  "reference": "Bees communicate the location of flowers by performing a waggle dance inside the hive."
+ },
+ {
+  "id": "b05-magma",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What does magma become when it reaches the surface?",
+  "expected_doc": "volcanoes",
+  "reference": "Magma becomes lava when it reaches the surface."
+ },
+ {
+  "id": "b06-books-count",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "How many books can members borrow from the Northlight library?",
+  "expected_doc": "northlight-loans",
+  "reference": "Members can borrow up to ten books."
+ },
+ {
+  "id": "b07-oxygen",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What do plants release into the air during photosynthesis?",
+  "expected_doc": "photosynthesis",
+  "reference": "Plants release oxygen into the air during photosynthesis."
+ },
+ {
+  "id": "b08-evaporation",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What causes evaporation in the water cycle?",
+  "expected_doc": "water-cycle",
+  "reference": "Heat from the sun causes evaporation from oceans, lakes, and rivers."
+ },
+ {
+  "id": "b09-tide",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What pulls on ocean water to cause a high tide?",
+  "expected_doc": "ocean-tides",
+  "reference": "The gravity of the moon pulls on ocean water and raises a bulge that causes high tide."
+ },
+ {
+  "id": "b10-pollen",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What carries pollen from flower to flower so pollination can happen?",
+  "expected_doc": "pollination",
+  "reference": "Bees, butterflies, and wind carry pollen from flower to flower."
+ },
+ {
+  "id": "b11-light-seeds",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "How do light seeds with wings travel away from the parent plant?",
+  "expected_doc": "seed-dispersal",
+  "reference": "Wind carries light seeds with wings or fine hairs across fields."
+ },
+ {
+  "id": "b12-epicentre",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What is the place on the surface above where an earthquake slip starts called?",
+  "expected_doc": "earthquakes",
+  "reference": "The place on the surface above where the earthquake slip starts is called the epicentre."
+ },
+ {
+  "id": "b13-photovoltaic",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What do photovoltaic cells release when sunlight strikes them in a solar panel?",
+  "expected_doc": "solar-power",
+  "reference": "Photovoltaic cells release electrons when sunlight strikes them."
+ },
+ {
+  "id": "b14-turbine-blades",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What spins the blades of a wind turbine to make electricity?",
+  "expected_doc": "wind-power",
+  "reference": "Wind spins the blades of a wind turbine."
+ },
+ {
+  "id": "b15-hydro-gates",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "How do hydro stations raise or lower output quickly?",
+  "expected_doc": "hydro-power",
+  "reference": "Hydro stations raise or lower output quickly by opening or closing gates that control the water flow."
+ },
+ {
+  "id": "b16-close-time",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What time does the Northlight library close on weekdays?",
+  "expected_doc": "northlight-hours",
+  "reference": "The Northlight library closes at nine in the evening on weekdays."
+ },
+ {
+  "id": "b17-storytime",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "When does storytime for young children happen at the Northlight library?",
+  "expected_doc": "northlight-events",
+  "reference": "Storytime for young children happens on Tuesday mornings in the childrens room and lasts forty minutes."
+ },
+ {
+  "id": "b18-navigate",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "How do birds navigate during migration?",
+  "expected_doc": "bird-migration",
+  "reference": "Birds navigate using the sun, the stars, and the magnetic field of the earth."
+ },
+ {
+  "id": "b19-salmon-eggs",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "Where do salmon lay their eggs when they reach their home stream?",
+  "expected_doc": "salmon-run",
+  "reference": "Salmon lay their eggs in gravel beds in their home stream."
+ },
+ {
+  "id": "b20-thunder",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What is thunder the sound of during a storm?",
+  "expected_doc": "storms",
+  "reference": "Thunder is the sound the heated air makes after lightning, a giant spark of electricity."
+ },
+ {
+  "id": "b21-seasons-tilt",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "Why does the northern half of the earth get summer while the southern half gets winter?",
+  "expected_doc": "seasons",
+  "reference": "The northern half of the earth tilts toward the sun, because the axis of the earth is tilted as the earth travels around the sun."
+ },
+ {
+  "id": "b22-valleys",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What do rivers carry downstream as they shape valleys?",
+  "expected_doc": "rivers-and-lakes",
+  "reference": "Rivers carry stones and soil downstream as they shape valleys."
+ },
+ {
+  "id": "b23-loan-weeks",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "For how many weeks can members borrow books at the Northlight library?",
+  "expected_doc": "northlight-loans",
+  "reference": "Members can borrow books for three weeks."
+ },
+ {
+  "id": "b24-bees-collect",
+  "slice": "in_corpus",
+  "category": "regression",
+  "question": "What do honey bees collect from flowers to feed their colony?",
+  "expected_doc": "bees",
+  "reference": "Honey bees collect nectar and pollen from flowers to feed their colony."
+ },
+ {
+  "id": "p01-condensation",
+  "slice": "in_corpus",
+  "category": "paraphrase",
+  "question": "How does moisture in the atmosphere become droplets that gather overhead?",
+  "expected_doc": "water-cycle",
+  "reference": "Water vapour cools high in the sky and condensation forms clouds."
+ },
+ {
+  "id": "p02-molten",
+  "slice": "in_corpus",
+  "category": "paraphrase",
+  "question": "What do you call hot liquid rock while it is subterranean, and after it emerges?",
+  "expected_doc": "volcanoes",
+  "reference": "Molten rock stored underground is called magma, and it becomes lava when it reaches the surface."
+ },
+ {
+  "id": "p05-storytelling",
+  "slice": "in_corpus",
+  "category": "paraphrase",
+  "question": "When is the weekly storytelling gathering for youngsters at Northlight?",
+  "expected_doc": "northlight-events",
+  "reference": "Storytime for young children happens on Tuesday mornings in the childrens room."
+ },
+ {
+  "id": "p06-byproduct",
+  "slice": "in_corpus",
+  "category": "paraphrase",
+  "question": "Which airborne byproduct do leafy plants emit while manufacturing nourishment?",
+  "expected_doc": "photosynthesis",
+  "reference": "Plants release oxygen into the air while they make food by photosynthesis."
+ },
+ {
+  "id": "a01-newton-year",
+  "slice": "adversarial",
+  "category": "absent_detail",
+  "question": "In what year did Isaac Newton publish his description of gravity as a universal attraction between masses?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a02-library-holdings",
+  "slice": "adversarial",
+  "category": "absent_detail",
+  "question": "How many books in total does the Northlight library own?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a03-salmon-days",
+  "slice": "adversarial",
+  "category": "absent_detail",
+  "question": "How many days does the salmon journey from the ocean back to the home stream take?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a04-magma-temperature",
+  "slice": "adversarial",
+  "category": "absent_detail",
+  "question": "At what temperature in degrees does magma become lava when it reaches the surface?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a05-sunday-night",
+  "slice": "adversarial",
+  "category": "false_premise",
+  "question": "Why does the Northlight library stay open all night on Sundays?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a06-moonlight-cells",
+  "slice": "adversarial",
+  "category": "false_premise",
+  "question": "What do photovoltaic cells release when moonlight strikes them at night?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a07-dance-warning",
+  "slice": "adversarial",
+  "category": "false_premise",
+  "question": "How do bees use the waggle dance to warn the colony about incoming storms?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a08-joining-fee",
+  "slice": "adversarial",
+  "category": "false_premise",
+  "question": "What fee does the Northlight library charge new members to join?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a09-vaccines",
+  "slice": "adversarial",
+  "category": "out_of_corpus",
+  "question": "How do vaccines train the immune system to recognise a disease?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a10-capital",
+  "slice": "adversarial",
+  "category": "out_of_corpus",
+  "question": "What is the capital city of Australia?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a11-diesel",
+  "slice": "adversarial",
+  "category": "out_of_corpus",
+  "question": "How does a diesel engine ignite its fuel without spark plugs?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ },
+ {
+  "id": "a12-house-prices",
+  "slice": "adversarial",
+  "category": "out_of_corpus",
+  "question": "Why do house prices usually rise when interest rates fall?",
+  "expected_doc": null,
+  "reference": "Not answerable from the corpus."
+ }
+]
