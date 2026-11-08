@@ -34,3 +34,21 @@ slice is exactly 30 percent of the 40-question set, as
 registered. The 4 chosen paraphrases cover four distinct
 expected documents (water-cycle, volcanoes, northlight-events,
 photosynthesis).
+
+## D4: the first scoring attempt met a closed rate-limit window
+
+The first Half 2 scoring run (2026-11-08, started 13:57 UTC)
+met HTTP 429 on every generateContent attempt, including
+attempts after the full registered backoff ladder; 16 failed
+attempts are in results/gemini_call_log.jsonl. The run was
+stopped with zero of 160 metric jobs completed, so no partial
+result exists and nothing is contaminated. Scoring restarts
+from zero when the route answers again, under the same frozen
+protocol (the registration freezes a minimum 4.0 s spacing, so
+slower pacing remains inside it if needed). Two harness
+parameters, not protocol terms, change for the restart: the
+Ragas RunConfig retry count goes from 2 to 1 so a closed
+window burns fewer quota calls per job, and the run's start is
+gated on two spaced probe calls succeeding. The route's
+availability is part of what this half measures; the incident
+is reported in AUDIT.md, not hidden.

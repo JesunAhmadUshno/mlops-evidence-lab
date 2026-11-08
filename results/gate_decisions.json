@@ -1,0 +1,56 @@
+[
+ {
+  "candidate": "challenger-tuned",
+  "evaluated_at_utc": "2026-11-08T13:59:28Z",
+  "champion_metrics": {
+   "auc": 0.781,
+   "ks": 0.4196,
+   "brier": 0.1355
+  },
+  "candidate_metrics": {
+   "auc": 0.7756,
+   "ks": 0.4235,
+   "brier": 0.1363
+  },
+  "candidate_run_id": "0e6cbb8a91b44d4bb9d6aa8d7d94cb28",
+  "bar": {
+   "auc_margin": 0.003,
+   "brier_slack": 0.002
+  },
+  "decision": "block",
+  "reasons": [
+   "AUC 0.7756 vs required >= 0.7840 (champion 0.7810 + 0.003): fail",
+   "Brier 0.1363 vs required <= 0.1375 (champion 0.1355 + 0.002): pass"
+  ],
+  "alias_champion_before": "1",
+  "alias_champion_after": "1",
+  "registered_version": null
+ },
+ {
+  "candidate": "negative-control",
+  "evaluated_at_utc": "2026-11-08T13:59:28Z",
+  "champion_metrics": {
+   "auc": 0.781,
+   "ks": 0.4196,
+   "brier": 0.1355
+  },
+  "candidate_metrics": {
+   "auc": 0.4828,
+   "ks": 0.0281,
+   "brier": 0.1727
+  },
+  "candidate_run_id": "df7dbfb66f404b52b286cf9eea8af6a8",
+  "bar": {
+   "auc_margin": 0.003,
+   "brier_slack": 0.002
+  },
+  "decision": "block",
+  "reasons": [
+   "AUC 0.4828 vs required >= 0.7840 (champion 0.7810 + 0.003): fail",
+   "Brier 0.1727 vs required <= 0.1375 (champion 0.1355 + 0.002): fail"
+  ],
+  "alias_champion_before": "1",
+  "alias_champion_after": "1",
+  "registered_version": null
+ }
+]

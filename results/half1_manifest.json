@@ -1,0 +1,13 @@
+{
+ "experiment": "credit-risk-lab-model-line",
+ "tracking_uri": "sqlite:///mlflow.db (local, gitignored)",
+ "data_file": "data/credit_card.xls",
+ "data_sha256": "30c6be3abd8dcfd3e6096c828bad8c2f011238620f5369220bd60cfc82700933",
+ "python": "3.12.3",
+ "mlflow": "3.18.0",
+ "sklearn": "1.9.1",
+ "pandas": "3.1.1",
+ "numpy": "2.5.4",
+ "git_commit": "25fe70a60c256aa20bd41a3979dc709a1fc52b22",
+ "built_at_utc": "2026-11-08T13:50:33Z"
+}

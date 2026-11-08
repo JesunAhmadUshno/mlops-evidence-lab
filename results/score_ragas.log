@@ -1,0 +1,9 @@
+/home/hatch/workspace/gap-closure/mlops-evidence-lab/src/score_ragas.py:28: DeprecationWarning: Importing Faithfulness from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import Faithfulness
+  from ragas.metrics import (  # noqa: E402
+/home/hatch/workspace/gap-closure/mlops-evidence-lab/src/score_ragas.py:28: DeprecationWarning: Importing LLMContextPrecisionWithReference from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import LLMContextPrecisionWithReference
+  from ragas.metrics import (  # noqa: E402
+/home/hatch/workspace/gap-closure/mlops-evidence-lab/src/score_ragas.py:28: DeprecationWarning: Importing LLMContextRecall from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import LLMContextRecall
+  from ragas.metrics import (  # noqa: E402
+/home/hatch/workspace/gap-closure/mlops-evidence-lab/src/score_ragas.py:28: DeprecationWarning: Importing ResponseRelevancy from 'ragas.metrics' is deprecated and will be removed in v1.0. Please use 'ragas.metrics.collections' instead. Example: from ragas.metrics.collections import ResponseRelevancy
+  from ragas.metrics import (  # noqa: E402
+Evaluating:   0%|          | 0/160 [00:00<?, ?it/s]

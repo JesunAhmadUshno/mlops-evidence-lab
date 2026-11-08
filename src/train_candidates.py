@@ -95,7 +95,12 @@ def main() -> None:
             calib_path = ROOT / "results" / f"calibration_{name}.json"
             dump_json(m["calibration"], calib_path)
             mlflow.log_artifact(str(calib_path))
-            mlflow.sklearn.log_model(pipe, name="model")
+            mlflow.sklearn.log_model(
+                pipe, name="model",
+                skops_trusted_types=[
+                    "numpy.dtype",
+                    "sklearn.ensemble._hist_gradient_boosting.predictor.TreePredictor",
+                ])
             run_id = run.info.run_id
         results[name] = {**m, "run_id": run_id,
                          "seconds": round(time.time() - started, 2)}

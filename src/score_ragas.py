@@ -65,7 +65,7 @@ def main() -> None:
     result = evaluate(
         dataset=dataset,
         metrics=metrics,
-        run_config=RunConfig(timeout=900, max_retries=2, max_wait=120,
+        run_config=RunConfig(timeout=900, max_retries=1, max_wait=120,
                              max_workers=4),
         raise_exceptions=False,
         show_progress=True,
