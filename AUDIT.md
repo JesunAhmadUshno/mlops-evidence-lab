@@ -1,8 +1,8 @@
-# Audit
+# Audit (the study report)
 
 Self-audit of mlops-evidence-lab against its own frozen
 protocol (PREREGISTRATION.md) and the standing project
-standard. Written after the runs it grades. Every number below
+standard. Written after the runs it reports on. Every number below
 is in RESULTS.md or in a results/ artifact.
 
 ## What the evidence supports
@@ -50,7 +50,10 @@ is in RESULTS.md or in a results/ artifact.
   for the restart so a closed window burns fewer calls per job.
 - CI runs Python 3.12 only: the pinned stack (numpy 2.5.x)
   requires 3.12 or newer, so the sibling-style 3.11 leg could
-  not install it (DECISIONS.md D5).
+  not install it (DECISIONS.md D5). Under the portfolio
+  standard v2 a 3.11 leg returns for the dependency-free checks
+  only: layout, lock, no public grade, and results regeneration
+  (DECISIONS.md D7).
 
 ## Jev claim check
 
@@ -68,36 +71,68 @@ the 429 account against results/gemini_call_log.jsonl. Every
 figure in the claim matches its artifact. Jev gates claims; it
 authorizes nothing, and nothing here needed authorizing.
 
-## Grade: 5,750 of 10,000
+## How the evidence is protected
 
-Deductions, itemized:
+1. Pre-registration before results. PREREGISTRATION.md is the
+   repository's first commit (2f5de92), made before any code or
+   result; git history shows the order, and the file has not changed
+   since. tests/test_layout.py pins its SHA-256, so CI fails if one
+   byte changes; amendments go to DECISIONS.md instead.
+2. Verdicts are code, not prose. scripts/make_results.py computes
+   every verdict from the frozen pass lines and the recorded
+   artifacts; tests/test_units.py exercises every branch of the H1 to
+   H4 rules. CI regenerates RESULTS.md and results/verdicts.json and
+   fails if either differs from the committed file.
+3. Pinned subjects and data. Both subject repositories are pinned to
+   commits and never modified; the credit data file is SHA-256
+   verified against the subject's own manifest before any run.
+4. Refusals are recorded. Every Gemini request, retry and status is
+   in results/gemini_call_log.jsonl, including the 429s that stopped
+   Half 2. No other provider or key was used to route around them.
+5. Grades are kept outside this repository; this report carries the
+   evidence and the verdicts only.
 
-- H3 and H4 not run. Half of the research question is
-  unanswered in this delivery: the harness, samples, and
-  scorer are complete and the blocker is external and
-  documented, but the standardized evaluation itself, the
-  second piece of evidence the study exists to produce, has
-  no scores. Minus 3,500.
-- H2's promote direction untested. The frozen design allowed
-  this outcome and the verdict reports it honestly, but the
-  gate's positive path has no evidence behind it. Minus 500.
-- Post-freeze harness corrections: the skops allowlist, the
-  scorer retry change, and the probe gating were all necessary
-  and all recorded, but a cleaner freeze would have needed
-  fewer of them. Minus 150.
-- CI covers one interpreter (3.12) where the house pattern is
-  two. Minus 100.
+## Threats to validity
 
-What would raise the grade: the route reopening. One command
+- H3 and H4 not run. Half of the research question is unanswered in
+  this delivery: the harness, samples, and scorer are complete and
+  the blocker is external and documented, but the standardized
+  evaluation itself, the second piece of evidence the study exists
+  to produce, has no scores.
+- H2's promote direction untested. The frozen design allowed this
+  outcome and the verdict reports it honestly, but the gate's
+  positive path has no evidence behind it.
+- Post-freeze harness corrections: the skops allowlist, the scorer
+  retry change, and the probe gating were all necessary and all
+  recorded, but a cleaner freeze would have needed fewer of them.
+- CI's full suite covers one interpreter (3.12) where the house
+  pattern is two; the 3.11 leg runs only the dependency-free checks
+  (DECISIONS.md D5, D7).
+- No interval on any headline number. H1 is one deterministic run
+  (seed 42, one fixed 70/30 split); it shows the published number is
+  reproducible, not how much it moves across splits or seeds. The
+  subject's own 5-seed mean (0.7830, results/rigor.json in
+  credit-risk-lab) is the nearest spread estimate and was not rerun
+  here.
+- No ablations. The ML research profile asks for one-part-at-a-time
+  removals; this study registered none, so the ML profile is not met
+  even for Half 1.
+- One machine of record (the Muse VM, htch-runtime). Numbers are
+  claimed for that machine and the pinned library versions in
+  results/half1_manifest.json.
+
+## What completes the study
+
+The route reopening. One command
 (.venv/bin/python src/score_ragas.py) then the results
 generator turns H3 and H4 from NOT RUN into measured verdicts,
-publishes the full per-question failure table, and removes
-most of the first deduction. Nothing else in the repository
+publishes the full per-question failure table, and answers the
+second half of the question. Nothing else in the repository
 needs to change for that to happen, which is the point of
 building the harness before the window closed.
 
-Addendum (same day, after the grade above was written): two
+Addendum (same day, after the section above was first written): two
 final probes returned one 200 and then a 429 two minutes
 later. The route trickles single calls; it does not sustain a
-run. The grade and the NOT RUN verdicts are unchanged
+run. The NOT RUN verdicts are unchanged
 (DECISIONS.md D6).
