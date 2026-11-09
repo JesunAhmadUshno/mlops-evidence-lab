@@ -77,10 +77,10 @@ scripts/make_results.py, never assigned by hand.
 - **H3 NOT RUN and H4 NOT RUN.** Half 2 is built end to end
   (frozen 40-question set, local generation, Ragas scorer with
   the judge and embeddings wired through the Gemini connector
-  route), but the route returned HTTP 429 on every
-  generateContent attempt across the registered backoff ladder
-  and across spaced probes over about an hour
-  (results/gemini_call_log.jsonl, DECISIONS.md D4). No Ragas
+  route), but after one successful smoke call the route
+  returned HTTP 429 on every generateContent attempt of the
+  stopped scoring run and on 5 spaced probes over about 4
+  minutes (results/gemini_call_log.jsonl, DECISIONS.md D4). No Ragas
   scores exist, and none are claimed. Scoring completes with
   one command when the route answers again; see below.
 

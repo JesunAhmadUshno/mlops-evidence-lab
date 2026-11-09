@@ -6,6 +6,11 @@ Versions follow Semantic Versioning; no release is tagged yet.
 ## [Unreleased]
 
 ### Changed
+- 2026-11-08: Narrowed the HTTP 429 account in README, AUDIT.md and
+  RESULTS.md to what results/gemini_call_log.jsonl shows (one smoke
+  call succeeded; the probes spanned about 4 minutes, not an hour)
+  and stated that the two D6 probes were not logged. Verdicts
+  unchanged.
 - 2026-11-08: Adopted the portfolio standard v2 (DECISIONS.md D7).
   README opens with the question, headline, field, job family and
   verdict. AUDIT.md is the report; its grade moved out of the public

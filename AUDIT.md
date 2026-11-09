@@ -36,11 +36,13 @@ is in RESULTS.md or in a results/ artifact.
   deleted and the recorded runs come from one clean store.
 - The first scoring attempt (2026-11-08) met HTTP 429 on every
   generateContent call through the full registered backoff
-  ladder. The run was stopped at 0 of 160 completed metric
-  jobs, so no partial scores exist. Spaced single-attempt
-  probes over the following hour also returned 429 (the call
-  log holds 3 smoke calls from wiring verification, 16 failed
-  attempts from the stopped run, and the probes). Scoring was
+  ladder, after one successful smoke call at 13:59:46 UTC. The
+  run was stopped at 0 of 160 completed metric jobs, so no
+  partial scores exist. 5 spaced single-attempt probes from
+  14:03:43 to 14:07:32 UTC (about 4 minutes) also returned 429
+  (the call log, which covers under 8 minutes, holds 3 smoke
+  calls from wiring verification, 16 failed attempts from the
+  stopped run, and the 5 probes). Scoring was
   not routed around the refusal: the protocol names one judge
   route, and the refusal is reported as a result about that
   route's capacity, consistent with the sibling study
@@ -48,10 +50,10 @@ is in RESULTS.md or in a results/ artifact.
   the same day). DECISIONS.md D4 records the restart gating;
   the Ragas retry count inside the harness was set from 2 to 1
   for the restart so a closed window burns fewer calls per job.
-- CI runs Python 3.12 only: the pinned stack (numpy 2.5.x)
-  requires 3.12 or newer, so the sibling-style 3.11 leg could
-  not install it (DECISIONS.md D5). Under the portfolio
-  standard v2 a 3.11 leg returns for the dependency-free checks
+- CI ran Python 3.12 only until D7: the pinned stack (numpy
+  2.5.x) requires 3.12 or newer, so the sibling-style 3.11 leg
+  could not install it (DECISIONS.md D5). Under the portfolio
+  standard v2 a 3.11 leg returned for the dependency-free checks
   only: layout, lock, no public grade, and results regeneration
   (DECISIONS.md D7).
 
@@ -68,7 +70,11 @@ Brier against results/half1_metrics.json; challenger and
 control AUCs against the same file; the frozen bar arithmetic
 (0.7810 + 0.003 = 0.7840) against results/gate_decisions.json;
 the 429 account against results/gemini_call_log.jsonl. Every
-figure in the claim matches its artifact. Jev gates claims; it
+figure in the claim matches its artifact, with one wording
+correction: the checked claim says the route returned 429 "on
+every attempt", but the call log shows one successful smoke call
+before the run; the narrower account above is the correct one,
+and the spec is kept as checked. Jev gates claims; it
 authorizes nothing, and nothing here needed authorizing.
 
 ## How the evidence is protected
@@ -86,9 +92,11 @@ authorizes nothing, and nothing here needed authorizing.
 3. Pinned subjects and data. Both subject repositories are pinned to
    commits and never modified; the credit data file is SHA-256
    verified against the subject's own manifest before any run.
-4. Refusals are recorded. Every Gemini request, retry and status is
-   in results/gemini_call_log.jsonl, including the 429s that stopped
-   Half 2. No other provider or key was used to route around them.
+4. Refusals are recorded. Every Gemini request, retry and status up
+   to the results commit is in results/gemini_call_log.jsonl,
+   including the 429s that stopped Half 2. The two later D6 probes
+   (one 200, one 429) were not logged; DECISIONS.md D6 is their
+   only record. No other provider or key was used to route around them.
 5. Grades are kept outside this repository; this report carries the
    evidence and the verdicts only.
 
@@ -133,6 +141,8 @@ building the harness before the window closed.
 
 Addendum (same day, after the section above was first written): two
 final probes returned one 200 and then a 429 two minutes
-later. The route trickles single calls; it does not sustain a
+later. These two probes were not written to the call log, and
+their timestamps were not recorded; DECISIONS.md D6 is their only
+record. The route trickles single calls; it does not sustain a
 run. The NOT RUN verdicts are unchanged
 (DECISIONS.md D6).

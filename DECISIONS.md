@@ -71,6 +71,9 @@ spaced successes) therefore still holds scoring back, and the
 NOT RUN verdicts stand as delivered. When the route sustains
 two spaced probes, the completion is the scorer command plus
 the results generator, with no other change needed.
+(Correction, 2026-11-08: these two probes were not written to
+results/gemini_call_log.jsonl and their timestamps were not
+recorded; this record is their only evidence.)
 
 ## D7: adopting the portfolio standard v2 (2026-11-08)
 
