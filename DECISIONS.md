@@ -59,7 +59,7 @@ The first CI matrix (3.11 and 3.12, the sibling pattern)
 failed on 3.11 because the pinned numerical stack requires
 Python 3.12 or newer (numpy 2.5.x declares Requires-Python
 >= 3.12). CI now runs the machine-of-record interpreter, 3.12,
-only. The deduction is recorded in AUDIT.md.
+only. The limitation is recorded in AUDIT.md.
 
 ## D6: after the audit was written, the route trickled, not opened
 
@@ -71,3 +71,19 @@ spaced successes) therefore still holds scoring back, and the
 NOT RUN verdicts stand as delivered. When the route sustains
 two spaced probes, the completion is the scorer command plus
 the results generator, with no other change needed.
+(Correction, 2026-11-08: these two probes were not written to
+results/gemini_call_log.jsonl and their timestamps were not
+recorded; this record is their only evidence.)
+
+## D7: adopting the portfolio standard v2 (2026-11-08)
+
+The repository adopts the portfolio standard v2 without renaming any
+file the lock names: PREREGISTRATION.md is the proposal, AUDIT.md the
+report, RESULTS.md the results, DECISIONS.md the decisions, results/
+the evidence. The internal grade that AUDIT.md carried moved out of the
+repository (grades are internal); its itemized limitations stay in
+AUDIT.md under "Threats to validity", without points. CI regains a
+Python 3.11 leg, but only for the checks that need no pinned
+numerical stack (tests/test_layout.py, the results regeneration
+check, byte-compilation); the full suite stays on 3.12 for the D5
+reason. Nothing in the protocol, the runs, or the verdicts changes.
