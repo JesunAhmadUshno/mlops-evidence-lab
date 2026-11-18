@@ -25,3 +25,4 @@ Published champion (credit-risk-lab, pinned commit): AUC 0.7810, KS 0.4196, Brie
 | --- | --- | --- |
 | challenger-tuned | block | AUC 0.7756 vs required >= 0.7840 (champion 0.7810 + 0.003): fail; Brier 0.1363 vs required <= 0.1375 (champion 0.1355 + 0.002): pass |
 | negative-control | block | AUC 0.4828 vs required >= 0.7840 (champion 0.7810 + 0.003): fail; Brier 0.1727 vs required <= 0.1375 (champion 0.1355 + 0.002): fail |
+| challenger-ensemble | block | AUC 0.7825 vs required >= 0.7840 (champion 0.7810 + 0.003): fail; Brier 0.1350 vs required <= 0.1375 (champion 0.1355 + 0.002): pass |
