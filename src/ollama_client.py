@@ -62,7 +62,7 @@ def _post(path: str, body: dict, kind: str, model: str) -> dict:
 def generate_text(prompt: str, temperature: float = 0.0) -> str:
     data = _post("/api/generate", {
         "model": JUDGE_MODEL, "prompt": prompt, "stream": False,
-        "options": {"temperature": temperature},
+        "options": {"temperature": temperature, "num_predict": 1024},
     }, "generate", JUDGE_MODEL)
     return data.get("response", "")
 

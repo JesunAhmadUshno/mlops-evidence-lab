@@ -252,3 +252,36 @@ Part 2: the switch, registered before any local run.
   RESULTS_LOCAL.md. Local-judge verdicts are never presented
   as Gemini results; the Gemini-instrument H3 and H4 state
   remains NOT RUN beside them.
+
+D9 addendum (2026-11-19, registered before the restarted
+local run it covers): execution venue and one harness
+parameter.
+
+- The first local attempt ran the scorer on this VM against
+  the R610's Ollama through an SSH local-forward tunnel. The
+  route dropped repeatedly (results/ollama_call_log.jsonl:
+  17 attempts, 8 RemoteDisconnected and 5 URLError against 4
+  HTTP 200, two of the 200s being the pre-run smoke calls),
+  and no job completed. That attempt was stopped at 0 of 160;
+  the scorer writes outputs only on completion, so nothing
+  was written and nothing is contaminated.
+- The execution of record therefore runs on the R610 itself,
+  in a detached python:3.12 container with host networking
+  and the repository mounted, OLLAMA_BASE
+  http://127.0.0.1:11434: no tunnel in the measurement path.
+  Same scorer, same wrappers, same models, same frozen
+  samples and rubric.
+- Measured judge speed on the R610 (Xeon E5540 host, no GPU):
+  a 445-token prompt processed in 1.1 s; generation about
+  0.9 tokens per second single-stream. The one faster-named
+  alternative on the same host, qwen3:4b, was timed on the
+  same prompt and did not finish within six minutes (its
+  default thinking trace runs long), so it was not
+  substituted; glm4:9b stands as registered.
+- One harness parameter is set in src/ollama_client.py for
+  the local instrument only: num_predict 1024. The rubric's
+  judge outputs are short JSON; the cap only bounds a
+  runaway generation (the local server otherwise generates
+  to the 4,096-token context). Like D4's retry-count change,
+  this is a harness parameter, not a protocol term: prompts,
+  rubric, samples, and verdict rules are untouched.
