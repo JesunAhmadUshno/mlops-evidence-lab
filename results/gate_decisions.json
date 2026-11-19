@@ -52,5 +52,32 @@
   "alias_champion_before": "1",
   "alias_champion_after": "1",
   "registered_version": null
+ },
+ {
+  "candidate": "challenger-ensemble",
+  "evaluated_at_utc": "2026-11-18T02:13:44Z",
+  "champion_metrics": {
+   "auc": 0.781,
+   "ks": 0.4196,
+   "brier": 0.1355
+  },
+  "candidate_metrics": {
+   "auc": 0.7825,
+   "ks": 0.4235,
+   "brier": 0.135
+  },
+  "candidate_run_id": "584745882e9c44399e8b98ecde7f8de0",
+  "bar": {
+   "auc_margin": 0.003,
+   "brier_slack": 0.002
+  },
+  "decision": "block",
+  "reasons": [
+   "AUC 0.7825 vs required >= 0.7840 (champion 0.7810 + 0.003): fail",
+   "Brier 0.1350 vs required <= 0.1375 (champion 0.1355 + 0.002): pass"
+  ],
+  "alias_champion_before": "1",
+  "alias_champion_after": "1",
+  "registered_version": null
  }
 ]
