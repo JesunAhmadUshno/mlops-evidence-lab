@@ -185,3 +185,70 @@ key was used, and nothing was paid (FREE-ONLY).
   route sustains two spaced probes and then the run itself,
   remains the scorer command plus the results generator, with
   no other change needed.
+
+## D9: the judge instrument is switched to a local model by amendment (2026-11-19)
+
+Part 1: the third registered Gemini attempt (2026-11-19, under
+Jesun's finish-everything order).
+
+- Probes (scripts/probe_route.py, single attempt each): HTTP
+  200 at 08:04:42Z, 08:06:14Z, and 08:08:22Z. The 08:06:14 and
+  08:08:22 pair is spaced 128 seconds, so the D4 restart gate
+  was met on the D8 precedent. Tests before the run: 11 passed.
+- The registered scoring command (.venv/bin/python
+  src/score_ragas.py) was started once, at about 08:09 UTC.
+  The route degraded inside the run: 142 attempts logged to
+  results/gemini_call_log.jsonl between 08:09:22Z and
+  08:28:09Z (47 HTTP 200, 93 HTTP 429, 2 timeouts). The last
+  200 was at 08:22:14Z; the 36 attempts after it were all 429.
+  Ragas internal progress reached 25 of 160 jobs. The run was
+  stopped at 08:28 UTC on the D6/D8 signature: a route
+  releasing isolated calls, then none.
+- The scorer writes outputs only on completion, so no
+  ragas_per_question.csv and no ragas_summary.json were
+  written; nothing is contaminated. The Gemini-instrument
+  state is unchanged: H3 and H4 remain NOT RUN under the
+  Gemini instrument.
+- Across three registered attempts (2026-11-08, 2026-11-17,
+  2026-11-19) the Gemini route has never sustained the
+  several-hundred-call scoring run, and FREE-ONLY bars buying
+  quota. The instrument is therefore switched below; the
+  Gemini route is not tried again under this registration.
+
+Part 2: the switch, registered before any local run.
+
+- Judge LLM: glm4:9b (GLM-4-9B chat, 9.4B parameters, Q4_0;
+  Ollama digest
+  5b699761eca535dc55047ad9d2dbf54e3b8697709419ef78a70503ed4bfbcf44),
+  served by the resident Ollama on the R610 at
+  localhost:11434, reached from this VM through an SSH
+  local-forward tunnel. Sampling temperature 0, mirroring
+  gemini_client.generate_text's default.
+- Embeddings (used by ResponseRelevancy only):
+  nomic-embed-text (137M, F16; Ollama digest
+  0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f),
+  served by the same Ollama, pulled free on 2026-11-19.
+- What does not change: the frozen samples
+  (results/rag_samples.json), the four Ragas metrics with
+  their prompts and rubric, raise_exceptions False with NaN
+  counted as a per-question scoring failure and never dropped,
+  the H3 and H4 pass lines in PREREGISTRATION.md, and the
+  verdict functions in scripts/make_results.py, which compute
+  the local verdicts unchanged (imported, not copied).
+- What changes: only the judge instrument (LLM and
+  embeddings), the scorer entry point
+  (src/score_ragas_local.py, a mirror of src/score_ragas.py
+  using src/ragas_wrappers_local.py), the results generator
+  (scripts/make_results_local.py), and the output paths:
+  results/ragas_per_question_local.csv,
+  results/ragas_per_question_local.json,
+  results/ragas_summary_local.json,
+  results/verdicts_local.json, and RESULTS_LOCAL.md. The
+  Gemini-instrument files (results/ragas_per_question.*,
+  results/verdicts.json, RESULTS.md) are not touched.
+- Labelling: every verdict from this run is a LOCAL-JUDGE
+  verdict (D9), recorded under that label in the outcome
+  entry below, in results/verdicts_local.json, and in
+  RESULTS_LOCAL.md. Local-judge verdicts are never presented
+  as Gemini results; the Gemini-instrument H3 and H4 state
+  remains NOT RUN beside them.
