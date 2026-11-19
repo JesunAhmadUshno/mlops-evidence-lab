@@ -180,9 +180,10 @@ def main() -> None:
         (ROOT / "results" / "verdicts.json").write_text(
             json.dumps(verdicts, indent=1))
         lines.append("- H3 NOT RUN and H4 NOT RUN: the Gemini route that "
-                     "Half 2's judge and embeddings must use returned HTTP "
-                     "429 on every generateContent attempt across the "
-                     "registered backoff ladder and across spaced probes "
+                     "Half 2's judge and embeddings must use, after one "
+                     "successful smoke call, returned HTTP 429 on every "
+                     "generateContent attempt of the stopped scoring run "
+                     "and on 5 spaced probes over about 4 minutes "
                      "(results/gemini_call_log.jsonl; DECISIONS.md D4). "
                      "The harness, the frozen samples, and the scorer are "
                      "complete; scoring is one command "

@@ -1,11 +1,55 @@
 # mlops-evidence-lab
 
-Can the two pieces of MLOps evidence a hiring panel actually
-asks for be produced honestly on a local stack: (1) a tracked,
-registered, reproducible model line whose published metrics
-survive a from-scratch rerun under experiment tracking, and
-(2) a standardized RAG evaluation whose failure cases are
-published, not hidden?
+**Question.** Can the two pieces of MLOps evidence a hiring panel
+actually asks for be produced honestly on a local stack: (1) a
+tracked, registered, reproducible model line whose published metrics
+survive a from-scratch rerun under experiment tracking, and (2) a
+standardized RAG evaluation whose failure cases are published, not
+hidden?
+
+**Headline.** The MLflow-tracked rerun reproduces credit-risk-lab's
+published champion exactly, AUC 0.7810 against 0.7810 (frozen
+tolerance 0.005; one deterministic seed-42 run on a fixed split, so no
+interval), and the registry gate blocked both candidates it was
+given; the RAG evaluation has no scores yet, because the only judge
+route the protocol allows returned HTTP 429.
+
+**Field.** ML and AI research. **Job family.** MLOps and ML
+engineering.
+
+**Verdict.** Functional. PREREGISTRATION.md is the repository's first
+commit (2f5de92), made before any code or result, and has not changed
+since; a test pins its SHA-256. Half 1 ran end to end (four MLflow
+runs, registry, gate), tests pass in CI, and RESULTS.md regenerates
+unchanged from the recorded evidence in CI. Not Evaluated: H3 and H4
+are NOT RUN, and the ML profile's intervals and ablations are absent
+(AUDIT.md, "Threats to validity").
+
+## Reproduce
+
+Checks, anywhere (no data download, no model calls):
+
+```text
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+sh scripts/fetch_rag_subject.sh && .venv/bin/python scripts/build_questions.py
+.venv/bin/python -m pytest tests -q
+.venv/bin/python scripts/make_results.py && git diff --exit-code RESULTS.md results/verdicts.json
+```
+
+The last line is the one-command reproduction: it rebuilds RESULTS.md
+and the verdicts from the recorded artifacts in results/. The full
+study pipeline is listed under "Full pipeline" below.
+
+## Lifecycle
+
+- Question: DONE 2026-11-08
+- Proposal: DONE 2026-11-08 (PREREGISTRATION.md, commit 2f5de92)
+- Baseline: DONE 2026-11-08 (subject's published figures; logistic regression rerun)
+- Build: DONE 2026-11-08
+- Evaluate: PARTIAL 2026-11-08 (Half 1 measured; Half 2 scoring blocked by the judge route, DECISIONS.md D4, D6)
+- Report: PARTIAL 2026-11-08 (AUDIT.md, RESULTS.md)
+- Review: OPEN
+- Release: OPEN
 
 The protocol was frozen in PREREGISTRATION.md (the first
 content commit of this repository) before any measured run.
@@ -33,16 +77,16 @@ scripts/make_results.py, never assigned by hand.
 - **H3 NOT RUN and H4 NOT RUN.** Half 2 is built end to end
   (frozen 40-question set, local generation, Ragas scorer with
   the judge and embeddings wired through the Gemini connector
-  route), but the route returned HTTP 429 on every
-  generateContent attempt across the registered backoff ladder
-  and across spaced probes over about an hour
-  (results/gemini_call_log.jsonl, DECISIONS.md D4). No Ragas
+  route), but after one successful smoke call the route
+  returned HTTP 429 on every generateContent attempt of the
+  stopped scoring run and on 5 spaced probes over about 4
+  minutes (results/gemini_call_log.jsonl, DECISIONS.md D4). No Ragas
   scores exist, and none are claimed. Scoring completes with
   one command when the route answers again; see below.
 
-Full tables and per-hypothesis text: RESULTS.md. The honest
-self-grade, with itemized deductions: AUDIT.md (5,750 of
-10,000; the un-run second half is most of the deduction).
+Full tables and per-hypothesis text: RESULTS.md. The study
+report, with what the evidence supports, incidents, and threats
+to validity: AUDIT.md.
 
 ## Half 1: the model line
 
@@ -98,7 +142,7 @@ the relevancy gap line (at least 0.30 confirms). The route's
 refusal is recorded, not routed around: no other provider, no
 new keys, per the protocol.
 
-## Reproduce
+## Full pipeline
 
     python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
     sh scripts/fetch_credit_data.sh          # verifies the data SHA-256
@@ -129,13 +173,24 @@ rate-limited door and says so.
 
 ## Layout
 
-- PREREGISTRATION.md: the frozen protocol and pass lines.
-- RESULTS.md: generated verdicts and tables (partial state
-  while Half 2 is un-run; it says so in its own text).
-- AUDIT.md: the self-grade with itemized deductions.
-- DECISIONS.md: every deviation and incident, dated.
-- src/: credit protocol, MLflow training, the gate, the
-  vendored subject pipeline (src/ragref), the Gemini client,
-  the Ragas wrappers and scorer.
-- results/: run artifacts, gate decisions, the frozen samples,
-  the Gemini call log, the Jev claim check.
+Files named in the locked PREREGISTRATION.md keep their names; the
+second column gives the role each plays in the portfolio standard.
+There is no experiments/ folder: the raw evidence lives in results/
+beside the generated files, as the lock names it.
+
+| Path | Role | What it holds |
+| --- | --- | --- |
+| PREREGISTRATION.md | proposal | The frozen protocol and pass lines (commit 2f5de92); a test fails if one byte changes |
+| AUDIT.md | report | What the evidence supports, how it is protected, incidents, threats to validity, the Jev claim check |
+| RESULTS.md | results | Generated verdicts and tables (partial while Half 2 is un-run; it says so in its own text) |
+| DECISIONS.md | decisions | Every deviation and incident, dated |
+| results/ | evidence | Run artifacts and manifest, gate decisions, the frozen RAG samples, the Gemini call log, the Jev claim check, verdicts.json |
+| data/ | evidence | The frozen 40-question set, adversarial questions, reference answers |
+| src/ | code | Credit protocol, MLflow training, the gate, the vendored subject pipeline (src/ragref), the Gemini client, the Ragas wrappers and scorer |
+| scripts/ | code | Data and subject fetchers, question builder, route probe, results generator, Jev claim check |
+| tests/ | tests | Metric, gate and verdict logic; layout, lock and no-public-grade checks |
+| CHANGELOG.md, CITATION.cff, SECURITY.md, LICENSE | release | Change history, citation, vulnerability reporting, Apache-2.0 |
+
+## License
+
+See LICENSE.
