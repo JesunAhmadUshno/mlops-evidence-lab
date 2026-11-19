@@ -285,3 +285,48 @@ parameter.
   to the 4,096-token context). Like D4's retry-count change,
   this is a harness parameter, not a protocol term: prompts,
   rubric, samples, and verdict rules are untouched.
+
+## D9 outcome (2026-11-19): local scoring running on the R610; verdicts pending the run
+
+- Executions of the local instrument. Attempt 1 (this VM,
+  SSH tunnel): stopped at 0 of 160 on connection failures
+  (D9 addendum). Attempt 2 (on-host, before the output cap):
+  stopped at 0 of 160 after one call completed in about
+  3 minutes and no further call completed in 10 minutes
+  (runaway-generation risk). Attempt 3 (on-host, with the
+  addendum's num_predict 1024): reached 11 of 160 jobs in
+  38 minutes 43 seconds of evaluation, with judge calls
+  logging HTTP 200 throughout (results/ollama_call_log.jsonl),
+  before it was stopped for the substitution measurement
+  below. Attempt 4, identical configuration, was relaunched
+  detached on the R610 at about 10:00 UTC and is the run of
+  record (container mlops-d9, host networking, repository
+  mounted at /home/brimwood/mlops-evidence-lab; progress in
+  results/score_ragas_local_2026-11-19_run2.log there). Tests
+  on this VM after the instrument code was written: 11
+  passed.
+- Measured pace, stated plainly: glm4:9b generates about
+  0.9 tokens per second single-stream on the R610's Xeon
+  E5540 host (a 445-token prompt processed in 1.1 s; the
+  cost is generation). Under the frozen RunConfig
+  (max_workers 4) the observed pace in attempt 3 degraded
+  from 77 to 188 seconds per job, projecting roughly eight
+  hours for the 160 jobs, because the host's CPU is shared
+  with its resident fleet services. The one smaller resident
+  instruction model, qwen3:4b, was measured twice on a short
+  prompt and did not complete a single generation within
+  six, then seven, minutes (its default thinking trace on
+  this server build; think=false was requested on the
+  /api/generate path and the generation still ran long), so
+  no substitution was made and glm4:9b stands.
+- State at this entry: the local-judge scoring is RUNNING
+  detached on the R610. On completion the scorer writes
+  results/ragas_per_question_local.csv,
+  results/ragas_per_question_local.json, and
+  results/ragas_summary_local.json in the R610 copy; the
+  verdict step is scripts/make_results_local.py in the same
+  container pattern, writing results/verdicts_local.json
+  and RESULTS_LOCAL.md. Until those files exist, H3 and H4
+  carry NO local-judge verdict, and the Gemini-instrument
+  state remains NOT RUN (D9 part 1). Nothing in this entry
+  is a verdict.
